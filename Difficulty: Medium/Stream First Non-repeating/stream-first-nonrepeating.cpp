@@ -1,10 +1,10 @@
 class Solution {
   public:
     string firstNonRepeating(string &s) {
+        // code here
         unordered_map<char, int> count;
         queue<int> q;
         string ans = "";
-        
         for(int i=0; i<s.length(); i++){
             char ch = s[i];
             
