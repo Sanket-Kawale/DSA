@@ -1,20 +1,21 @@
 class Solution {
   public:
     int maxSubarraySum(vector<int> &arr) {
-        int maxSoFar = INT_MIN;
-        int maxEndingHere = 0;
         int n = arr.size();
+        int target = INT_MIN;
+        int temp = 0;
+        
         for(int i=0; i<n; i++){
-            maxEndingHere += arr[i];
+            temp += arr[i];
             
-            if(maxEndingHere > maxSoFar){
-                maxSoFar = maxEndingHere;
+            if(temp > target){
+                target = temp;
+            }
+            if(temp < 0){
+                temp = 0;
             }
             
-            if(maxEndingHere < 0){
-                maxEndingHere = 0;
-            }
         }
-        return maxSoFar;
+        return target;
     }
 };
