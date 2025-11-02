@@ -11,14 +11,13 @@
  */
 class Solution {
 public:
-    void preOrder(TreeNode* root, vector<int> &result){
-        if(root == NULL){
+    void preOrder(TreeNode* root, vector<int>& result){
+        if(root == NULL){                   //base case
             return;
         }
-        result.push_back(root->val);
-        preOrder(root->left, result);
-        preOrder(root->right, result);
-
+        result.push_back(root->val);        //store root node
+        preOrder(root->left, result);       //for the left subtree's root
+        preOrder(root->right, result);      //for the right subtree's root
     }
     vector<int> preorderTraversal(TreeNode* root) {
         vector<int> result;
