@@ -12,7 +12,7 @@
 class Solution {
 public:
     TreeNode* getIS(TreeNode* root){
-        while(root != NULL && root->left != NULL){
+        while(root !=NULL && root->left != NULL){
             root = root->left;
         }
         return root;
@@ -21,10 +21,10 @@ public:
         if(root == NULL){
             return NULL;
         }
-        if(key < root->val){
+        if(root->val > key){
             root->left = deleteNode(root->left, key);
         }
-        else if(key > root->val){
+        else if(root->val < key){
             root->right = deleteNode(root->right, key);
         }
         else{
@@ -41,7 +41,7 @@ public:
             else{
                 TreeNode* IS = getIS(root->right);
                 root->val = IS->val;
-                root->right = deleteNode(root->right, IS->val);     //imp line
+                root->right = deleteNode(root->right, IS->val);
             }
         }
         return root;
