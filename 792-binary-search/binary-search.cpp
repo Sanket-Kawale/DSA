@@ -1,21 +1,21 @@
 class Solution {
 public:
     int search(vector<int>& nums, int target) {
-        int start = 0;
-        int end = nums.size()-1;
-        int mid = start + (end - start)/2;  //for range out of bounds
+        int s = 0;
+        int e = nums.size()-1;
+        int mid = s + (e-s)/2;
 
-        while(start <= end){
+        while(s <= e){
             if(nums[mid] == target){
                 return mid;
             }
-            else if(target > nums[mid]){
-                start++;
+            else if(nums[mid] < target){
+                s = mid+1;
             }
             else{
-                end--;
+                e = mid-1;
             }
-            mid = start + (end - start)/2;
+            mid = s + (e-s)/2;
         }
         return -1;
     }
