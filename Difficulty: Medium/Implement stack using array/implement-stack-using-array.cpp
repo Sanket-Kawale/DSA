@@ -1,7 +1,7 @@
 class myStack {
   public:
-    int *arr;
     int top;
+    int *arr;
     int n;
     myStack(int n) {
         top = -1;
@@ -11,12 +11,12 @@ class myStack {
 
     bool isEmpty() {
         if(top == -1)   return 1;
-        else return 0;
+        else    return 0;
     }
 
     bool isFull() {
-        if(top == n-1) return 1;
-        else return 0;
+        if(top == n-1)  return 1;
+        else    return 0;
     }
 
     void push(int x) {
@@ -33,9 +33,8 @@ class myStack {
     }
 
     int peek() {
-        if(top >=0){
+        if(top >= 0){
             return arr[top];
         }
-        else return -1;
     }
 };
