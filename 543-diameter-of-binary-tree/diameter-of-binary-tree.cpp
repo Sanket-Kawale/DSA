@@ -9,23 +9,28 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-class Solution {
+class Solution {    //optimal solution
 public:
-    int height(TreeNode* root){
-        if(root == NULL)    return 0;
-        int left = height(root->left);
-        int right = height(root->right);
+    pair<int, int> diameterFast(TreeNode* root){
+        if(root == NULL){
+            pair<int, int> p = make_pair(0,0);
+            return p;
+        }
 
-        return 1+max(left, right);
+        pair<int, int> left = diameterFast(root->left);
+        pair<int, int> right = diameterFast(root->right);
+
+        int op1 = left.first;
+        int op2 = right.first;
+        int op3 = left.second + right.second;
+
+        pair<int, int> ans;
+        ans.first = max({op1, op2, op3});
+        ans.second = max(left.second, right.second) + 1;
+
+        return ans;
     }
     int diameterOfBinaryTree(TreeNode* root) {
-        if(root == NULL)    return 0;
-        int leftCnt = diameterOfBinaryTree(root->left);
-        int rightCnt = diameterOfBinaryTree(root->right);
-        int combo = height(root->left) + height(root->right);
-
-        int max_num = 0;
-        max_num = max({leftCnt, rightCnt, combo});
-        return max_num;
+        return diameterFast(root).first;
     }
 };
