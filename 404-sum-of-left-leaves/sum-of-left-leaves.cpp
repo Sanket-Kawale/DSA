@@ -13,12 +13,12 @@ class Solution {
 public:
     void inorder(TreeNode* root, int &sum){
         if(root == NULL)    return;
-        if(root->left && root->left->left == NULL && 
-            root->left->right == NULL){
-                sum = sum+root->left->val;
-            }
-            inorder(root->left, sum);
-            inorder(root->right, sum);
+
+        if(root->left && root->left->left == NULL && root->left->right == NULL){
+            sum = sum + root->left->val;
+        }
+        inorder(root->left, sum);
+        inorder(root->right, sum);
     }
     int sumOfLeftLeaves(TreeNode* root) {
         int sum = 0;
