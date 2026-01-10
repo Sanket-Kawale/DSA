@@ -17,21 +17,21 @@ class Solution {
         if(root == NULL){
             return result;
         }
-        queue<Node*> q;
+        queue<Node* > q;
         q.push(root);
         
         bool leftToright = true;
-        
         while(!q.empty()){
             int size = q.size();
             vector<int> ans(size);
             
             for(int i=0; i<size; i++){
+                
                 Node* frontNode = q.front();
                 q.pop();
-                
+            
                 int index = leftToright ? i : size - i - 1;
-                ans[index] = frontNode -> data;
+                ans[index] = frontNode->data;
                 
                 if(frontNode->left){
                     q.push(frontNode->left);
@@ -40,7 +40,8 @@ class Solution {
                     q.push(frontNode->right);
                 }
             }
-            leftToright =! leftToright;
+            
+            leftToright  =! leftToright; 
             for(auto i: ans){
                 result.push_back(i);
             }
