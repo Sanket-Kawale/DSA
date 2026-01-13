@@ -17,7 +17,7 @@ class Node {
 class Solution {
   public:
     void traverseLeft(Node* root, vector<int> &ans){
-        if(root == NULL || (root->left == NULL && root->right == NULL)){
+        if(root == NULL || (root->left == NULL && root->right == NULL)){    //dont want leaf nodes
             return;
         }
         ans.push_back(root->data);
@@ -27,20 +27,19 @@ class Solution {
         else{
             traverseLeft(root->right, ans);
         }
-        
     }
     void traverseLeaf(Node* root, vector<int> &ans){
         if(root == NULL)    return;
         if(root->left == NULL && root->right == NULL){
             ans.push_back(root->data);
-            return;
+            return; //we have got leaf nodes here
         }
         
         traverseLeaf(root->left, ans);
         traverseLeaf(root->right, ans);
     }
     void traverseRight(Node* root, vector<int> &ans){
-        if(root == NULL || (root->left == NULL && root->right == NULL)){
+        if(root == NULL || (root->left == NULL && root->right == NULL)){    //dont want leaf nodes
             return;
         }
         if(root->right){
@@ -55,16 +54,10 @@ class Solution {
         vector<int> ans;
         if(root == NULL)    return ans;
         
-        //root node printing
         ans.push_back(root->data);
-        //getting left boundary nodes
         traverseLeft(root->left, ans);
-        
-        //getting leaf nodes of both sides
-        traverseLeaf(root->left, ans);
-        traverseLeaf(root->right, ans);
-    
-        //getting right boundary nodes
+        traverseLeaf(root->left ,ans);
+        traverseLeaf(root->right ,ans);
         traverseRight(root->right, ans);
         
         return ans;
