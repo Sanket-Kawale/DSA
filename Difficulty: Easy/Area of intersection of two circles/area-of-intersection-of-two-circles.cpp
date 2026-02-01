@@ -16,8 +16,8 @@ class Solution {
             else{   area = pi*(R1*R1); }
         }
         else{
-            long double alpha = 2*acos( ((R1*R1) + (d*d) - (R2*R2)) / (2.0L*R1*d) );
-            long double beta = 2*acos( ((R2*R2) + (d*d) - (R1*R1)) / (2.0L*R2*d) );
+            long double alpha = 2*acos( ((R1*R1) + (d*d) - (R2*R2)) / (2*R1*d) );
+            long double beta = 2*acos( ((R2*R2) + (d*d) - (R1*R1)) / (2*R2*d) );
             
             long double area1 = 0.5 * (R1*R1) * ((alpha - sin(alpha)));
             long double area2 = 0.5 * (R2*R2) * ((beta - sin(beta)));
