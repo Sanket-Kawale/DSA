@@ -1,25 +1,26 @@
 class Solution {
 public:
-    vector<string> solve(vector<string> &ans, string curr, int open, int close, int n){
-        
-        if(curr.length() == 2*n){
+    void solve(vector<string> &ans, string curr, int open, int close, int n){
+
+        // vector<string> curr;
+
+        if(curr.size() == 2*n){
             ans.push_back(curr);
-            return ans;
+            return;
         }
 
         if(open < n){
-            ans = solve(ans, curr+'(', open+1, close, n);
+            solve(ans, curr+"(", open+1, close, n);
         }
         if(close < open){
-            ans = solve(ans, curr+')', open, close+1, n);
+            solve(ans, curr+")", open, close+1, n);
         }
 
-        return ans;
+        return;
     }
     vector<string> generateParenthesis(int n) {
         vector<string> ans;
-
-        ans = solve(ans, "", 0, 0, n);
+        solve(ans, "", 0, 0, n);
 
         return ans;
     }
