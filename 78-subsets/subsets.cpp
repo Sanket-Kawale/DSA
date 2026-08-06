@@ -1,18 +1,18 @@
 class Solution {
 public:
-    void solve(vector<vector<int>> &ans, vector<int> nums, vector<int> output, int index){
+    void solve(vector<vector<int>>& ans, vector<int> nums, vector<int> output, int index){
 
-        if(index >= nums.size()){           //base condiiton reached
-            ans.push_back(output);          //if out of bound index
+        if(index == nums.size()){
+            ans.push_back(output);
             return;
         }
 
-        //exclude number
-        solve(ans, nums, output, index+1);  //right condition
+        //exclude
+        solve(ans, nums, output, index+1);
 
-        //include number                
-        int element = nums[index];          //left condition
-        output.push_back(element);
+        //include
+        int number = nums[index];
+        output.push_back(number);
         solve(ans, nums, output, index+1);
 
     }
@@ -22,7 +22,6 @@ public:
         int index = 0;
 
         solve(ans, nums, output, index);
-
         return ans;
     }
 };
