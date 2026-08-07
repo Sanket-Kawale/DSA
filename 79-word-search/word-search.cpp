@@ -1,32 +1,40 @@
 class Solution {
 public:
-    bool exist(vector<vector<char>>& board, string word) {
-        int m = board.size();
-        int n = board[0].size();
-        
-        function<bool(int, int, int)> backtrack = [&](int i, int j, int k) {
-            if (k == word.length()) {
-                return true;
-            }
-            if (i < 0 || i >= m || j < 0 || j >= n || board[i][j] != word[k]) {
-                return false;
-            }
-            
-            char temp = board[i][j];
-            board[i][j] = '\0';
-            
-            if (backtrack(i + 1, j, k + 1) || backtrack(i - 1, j, k + 1) || 
-                backtrack(i, j + 1, k + 1) || backtrack(i, j - 1, k + 1)) {
-                return true;
-            }
-            
-            board[i][j] = temp; 
+    bool solve(vector<vector<char>>& board, string word, int i, int j, int index){
+        int row = board.size();
+        int col = board[0].size();
+
+        if(index >= word.length()){
+            return true;
+        }
+        if(i<0 || i>=row || j<0 || j>=col){
             return false;
-        };
-        
-        for (int i = 0; i < m; ++i) {
-            for (int j = 0; j < n; ++j) {
-                if (backtrack(i, j, 0)) {
+        }
+        if(board[i][j] != word[index]){
+            return false;
+        }
+
+        char temp = board[i][j];
+        board[i][j] = '#';
+
+        bool found = 
+        solve(board, word, i+1, j, index+1) ||
+        solve(board, word, i-1, j, index+1) ||
+        solve(board, word, i, j+1, index+1) || 
+        solve(board, word, i, j-1, index+1);
+
+        board[i][j] = temp;
+
+        return found;
+    }
+    bool exist(vector<vector<char>>& board, string word) {
+        int row = board.size();
+        int col = board[0].size();
+
+        for(int i=0; i<row; i++){
+            for(int j=0; j<col; j++){
+                if(board[i][j] == word[0]){
+                    if(solve(board, word, i, j, 0))
                     return true;
                 }
             }
