@@ -1,1 +1,1 @@
-<h2>n-queens Notes</h2><hr>[ Time taken: 1hr 24m 12s ]
+<h2>n-queens Notes</h2><hr>[ Time taken: 20m 10s ]
