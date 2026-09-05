@@ -1,27 +1,25 @@
 class Solution {
 public:
     bool uniformArray(vector<int>& nums1) {
-        int odd = 0, even = 0;
+        int odd = 0;
+        int even = 0;
 
-        for(int x : nums1) {
-            if(x % 2)
-                odd++;
-            else
+        for(int i=0; i<nums1.size(); i++){
+            if(nums1[i] % 2 == 0){
                 even++;
+            }
+            else{
+                odd++;
+            }
         }
 
-        // All already have same parity
-        if(odd == 0 || even == 0)
-            return true;
+        if(odd == 0 && even != 0)       return true;
+        if(odd != 0 && even == 0)       return true;
 
-        // To make all odd, every even number needs a smaller odd number.
         int smallest = *min_element(nums1.begin(), nums1.end());
 
-        if(smallest % 2 == 1)
-            return true;
+        if(smallest % 2 == 1)   return true;
 
-        // Smallest is even, so we cannot use an odd number smaller than
-        // every even number. Hence mixed parity is impossible.
         return false;
     }
 };
