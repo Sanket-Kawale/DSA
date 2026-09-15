@@ -1,39 +1,51 @@
 class Solution {
 public:
     int maxPalindromes(string s, int k) {
-        int n = s.length();
+        int n = s.size();
+        int ans = 0;
+        int start = 0;
 
-        vector<vector<bool>> palindrome(n, vector<bool>(n, false));
+        while(start + k <= n) {
+            bool found = false;
 
-        for(int length=1; length<=n; length++){
-            for(int i=0; i+length-1 < n; i++){
-                int j = i+length-1;
+            // Check palindrome of length k
+            int left = start;
+            int right = start + k - 1;
 
-                if(length == 1){
-                    palindrome[i][j] = true;
+            while(left < right && s[left] == s[right]) {
+                left++;
+                right--;
+            }
+
+            if(left >= right) {
+                ans++;
+                start += k;
+                found = true;
+                continue;
+            }
+
+            // Check palindrome of length k + 1
+            if(start + k + 1 <= n) {
+                left = start;
+                right = start + k;
+
+                while(left < right && s[left] == s[right]) {
+                    left++;
+                    right--;
                 }
-                else if(length == 2){
-                    palindrome[i][j] = (s[i] == s[j]);
-                }
-                else{
-                    palindrome[i][j] = (s[i]==s[j] && palindrome[i+1][j-1]);
+
+                if(left >= right) {
+                    ans++;
+                    start += k + 1;
+                    found = true;
+                    continue;
                 }
             }
+
+            if(!found)
+                start++;
         }
 
-        vector<int> dp(n+1, 0);
-
-        for(int i=1; i<=n; i++){
-            dp[i] = dp[i-1];
-
-            for(int start=0; start<i; start++){
-                int length = i-start;
-
-                if(length >= k && palindrome[start][i-1]){
-                    dp[i] = max(dp[i], dp[start]+1);
-                }
-            }
-        }
-        return dp[n];
+        return ans;
     }
 };
