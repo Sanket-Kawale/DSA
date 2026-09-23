@@ -1,21 +1,25 @@
-// using map
+// Bit manipulation -> optimal
 class Solution {
 public:
     vector<int> singleNumber(vector<int>& nums) {
-        int n = nums.size();
-        vector<int> result;
-        unordered_map<int, int>ans;
-
-        for(int num : nums){
-            ans[num]++;
+        int n = nums.size();    
+        long long ans = 0;
+    
+        for(int i=0; i<n; i++){
+            ans = ans ^ nums[i];
         }
 
-        int size = ans.size();
-        for(auto num : ans){
-            if(num.second == 1){
-                result.push_back(num.first);
+        int rightmost = (ans^ans-1) & ans;
+        int b1 = 0, b2 = 0;
+
+        for(int i=0; i<n; i++){
+            if(nums[i] & rightmost){
+                b1 = b1 ^ nums[i];
+            }
+            else{
+                b2 = b2 ^ nums[i];
             }
         }
-        return result;
+        return {b1, b2};
     }
 };
