@@ -1,27 +1,40 @@
 class Solution {
 public:
     string reverseParentheses(string s) {
-        vector<int> stack;
-        int n = s.length();
+        int n = s.size();
+        vector<int> match(n);
+        vector<int> st;
 
-        for(int i=0; i<n; i++){
-            if(s[i] == '('){
-                stack.push_back(i);
+        // Find matching brackets
+        for(int i = 0; i < n; i++) {
+            if(s[i] == '(') {
+                st.push_back(i);
             }
-            else if(s[i] == ')'){
-                int start = stack.back();
-                stack.pop_back();
+            else if(s[i] == ')') {
+                int j = st.back();
+                st.pop_back();
 
-                reverse(s.begin()+start+1, s.begin()+i);
+                match[i] = j;
+                match[j] = i;
             }
         }
 
         string ans = "";
-        for(char ch : s){
-            if(ch != '(' && ch != ')'){
-                ans.push_back(ch);
+        int i = 0;
+        int dir = 1;
+
+        while(i < n) {
+            if(s[i] == '(' || s[i] == ')') {
+                i = match[i];
+                dir = -dir;
             }
+            else {
+                ans += s[i];
+            }
+
+            i += dir;
         }
+
         return ans;
     }
 };
