@@ -1,22 +1,20 @@
 class Solution {
 public:
     int findContentChildren(vector<int>& g, vector<int>& s) {
-        int ans = 0;
-
         sort(g.begin(), g.end());
         sort(s.begin(), s.end());
-        int i=0, j=0;
-        while(i<g.size() && j<s.size()){
-            if(s[j] >= g[i]){
-                ans = ans + 1;
+        
+        int i = 0; // Tracks content children
+        int j = 0; // Tracks cookie availability
+        
+        while (i < g.size() && j < s.size()) {
+            // If the cookie satisfies the child, move to the next child
+            if (s[j] >= g[i]) {
+                i++;
             }
-            if(g[i] > s[j]){
-                j++;
-                continue;
-            }
-            i++;
+            // Regardless of a match, this cookie is processed; look at the next one
             j++;
         }
-        return ans;
+        return i; 
     }
 };
